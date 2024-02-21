@@ -73,12 +73,15 @@ const threeContacts = contacts.splice(0, 3);
 
 threeContacts.forEach(contact => {
   const newContact = createAContactEntry(contact.name,contact.pictureUrl,contact.popularity)
+  newContact.setAttribute('data-contact',encodeURIComponent(JSON.stringify(contact)))
   tableBody.appendChild(newContact)
   console.log(newContact)
   const newContactDeleteButton = newContact.querySelector('.btn-delete')
   console.log(newContactDeleteButton)
   newContactDeleteButton.addEventListener('click', () => {
-    console.log('click on delete for row',newContact.innerText)
+    //console.log('click on delete for row',newContact.innerText)
+    //console.log(decodeURIComponent(newContact.getAttribute('data-contact')))
+    contacts.push(JSON.parse(decodeURIComponent(newContact.getAttribute('data-contact'))))
     newContact.remove()
   })
   const newContactLikeButton = newContact.querySelector('.btn-like')
@@ -113,11 +116,15 @@ buttonAddRandom.addEventListener('click', () => {
   console.log('click on random button');
   const randomIndex = randomInd(contacts.length)
   const newContact = createAContactEntry(...Object.values(contacts[randomIndex]))
+  newContact.setAttribute('data-contact',encodeURIComponent(JSON.stringify(contacts[randomIndex])))
   tableBody.appendChild(newContact)
   const newContactDeleteButton = newContact.querySelector('.btn-delete')
   console.log(newContactDeleteButton)
   newContactDeleteButton.addEventListener('click', () => {
-    console.log('click on delete for row',newContact.innerText)
+    //console.log('click on delete for row',newContact.innerText)
+    //console.log(newContact.getAttribute('data-contact'))
+    //contacts.push(JSON.parse(newContact.getAttribute('data-contact')))
+    contacts.push(JSON.parse(decodeURIComponent(newContact.getAttribute('data-contact'))))
     newContact.remove()
   })
   const newContactLikeButton = newContact.querySelector('.btn-like')
