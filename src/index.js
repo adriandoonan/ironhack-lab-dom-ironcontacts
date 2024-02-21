@@ -106,10 +106,13 @@ threeContacts.forEach(contact => {
 
 // Your code goes here ...
 buttonAddRandom.addEventListener('click', () => {
-  if (contacts.length === 0 ) alert('sorry, there are no more contacts to add')
+  if (contacts.length === 0 ) {
+    alert('sorry, there are no more contacts to add');
+    return
+  }
   console.log('click on random button');
   const randomIndex = randomInd(contacts.length)
-  const newContact = createAContactEntry(...Object.values({name,popularity,pictureUrl} = contacts[randomIndex]))
+  const newContact = createAContactEntry(...Object.values(contacts[randomIndex]))
   tableBody.appendChild(newContact)
   const newContactDeleteButton = newContact.querySelector('.btn-delete')
   console.log(newContactDeleteButton)
